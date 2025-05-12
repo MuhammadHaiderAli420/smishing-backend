@@ -1,7 +1,14 @@
 import mongoose from 'mongoose';
 
 const ReportLogSchema = new mongoose.Schema({
-  sender: String,
+  sender: {
+    type: String,
+    required: true
+  },
+  userId: {
+    type: String,
+    required: true
+  },
   reportedAt: {
     type: Date,
     default: Date.now

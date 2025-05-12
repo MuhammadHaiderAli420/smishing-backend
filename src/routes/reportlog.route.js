@@ -1,16 +1,22 @@
 import express from 'express';
-import { logReportAndCheckAlert } from '../controllers/reportlog.controller.js';
+import ReportLog from '../models/reportlog.model.js';
+import { checkAndAutoBlacklist } from '../controllers/autoblacklist.controller.js';
 
 const router = express.Router();
 
-// Dummy route to simulate a user reporting a scam message
+// POST /api/reportlog/simulate-report
 router.post('/simulate-report', async (req, res) => {
-  const { sender } = req.body;
+  const { sender, userId } = req.body;
 
-  if (!sender) return res.status(400).json({ message: 'Sender is required' });
+  if (!sender || !userId) {
+    return res.status(400).json({ message: 'sender and userId are required' });
+  }
 
-  await logReportAndCheckAlert(sender);
-  res.status(200).json({ message: `Report for sender ${sender} logged.` });
+  await ReportLog.create({ sender, userId });
+
+  await checkAndAutoBlacklist(sender);
+
+  res.status(200).json({ message: `Report from ${userId} for ${sender} recorded and checked.` });
 });
 
 export default router;
