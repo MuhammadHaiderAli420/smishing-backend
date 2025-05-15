@@ -9,7 +9,7 @@ const router = express.Router();
 
 // Dummy middleware (replace with real authentication in production)
 const dummyUserMiddleware = (req, res, next) => {
-  req.user = { _id: '663fd7e1c8f6c7b59d04f450' }; // Replace with actual user ID
+  req.user = { _id: '663fd7e1c8f6c7b59d04f452' }; // Replace with actual user ID
   next();
 };
 

@@ -12,5 +12,5 @@ const AutoBlacklistSchema = new mongoose.Schema({
   }
 });
 
-const AutoBlacklist = mongoose.model('AutoBlacklist', AutoBlacklistSchema);
+const AutoBlacklist = mongoose.models.AutoBlacklist || mongoose.model('AutoBlacklist', AutoBlacklistSchema);
 export default AutoBlacklist;

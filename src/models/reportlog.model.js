@@ -15,5 +15,5 @@ const ReportLogSchema = new mongoose.Schema({
   }
 });
 
-const ReportLog = mongoose.model('ReportLog', ReportLogSchema);
+const ReportLog = mongoose.models.ReportLog || mongoose.model('ReportLog', ReportLogSchema);
 export default ReportLog;

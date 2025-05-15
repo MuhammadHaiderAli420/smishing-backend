@@ -4,7 +4,6 @@ import { checkAndAutoBlacklist } from '../controllers/autoblacklist.controller.j
 
 const router = express.Router();
 
-// POST /api/reportlog/simulate-report
 router.post('/simulate-report', async (req, res) => {
   const { sender, userId } = req.body;
 
@@ -13,10 +12,9 @@ router.post('/simulate-report', async (req, res) => {
   }
 
   await ReportLog.create({ sender, userId });
-
   await checkAndAutoBlacklist(sender);
 
-  res.status(200).json({ message: `Report from ${userId} for ${sender} recorded and checked.` });
+  res.status(200).json({ message: `Report from ${userId} for ${sender} logged.` });
 });
 
 export default router;
